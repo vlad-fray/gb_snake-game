@@ -144,6 +144,7 @@ const snake = {
 	body: [],
 	direction: null,
 	lastStepDirection: null,
+	config,
 
 	init(startBody, direction) {
 		this.body = startBody;
@@ -185,16 +186,24 @@ const snake = {
 
 	getNextStepHeadPoint() {
 		const firstPoint = this.getBody()[0];
+		const rowLimit = this.config.getRowsCount();
+		const colLimit = this.config.getColsCount();
 
 		switch (this.direction) {
 			case 'up':
-				return { x: firstPoint.x, y: firstPoint.y - 1 };
+				return {
+					x: firstPoint.x,
+					y: firstPoint.y - 1 < 0 ? rowLimit - 1 : firstPoint.y - 1,
+				};
 			case 'down':
-				return { x: firstPoint.x, y: firstPoint.y + 1 };
+				return { x: firstPoint.x, y: (firstPoint.y + 1) % rowLimit };
 			case 'right':
-				return { x: firstPoint.x + 1, y: firstPoint.y };
+				return { x: (firstPoint.x + 1) % colLimit, y: firstPoint.y };
 			case 'left':
-				return { x: firstPoint.x - 1, y: firstPoint.y };
+				return {
+					x: firstPoint.x - 1 < 0 ? colLimit - 1 : firstPoint.x - 1,
+					y: firstPoint.y,
+				};
 		}
 	},
 };
@@ -387,7 +396,10 @@ const game = {
 			if (this.isGameWon()) this.finish();
 		}
 
-		this.snake.makeStep();
+		this.snake.makeStep(
+			this.config.getRowsCount(),
+			this.config.getColsCount()
+		);
 		this.render();
 	},
 
@@ -410,12 +422,7 @@ const game = {
 			});
 
 		const isSteppable =
-			!this.snake.isOnPoint(nextHeadPoint) &&
-			!isObstacle &&
-			nextHeadPoint.x < this.config.getColsCount() &&
-			nextHeadPoint.y < this.config.getRowsCount() &&
-			nextHeadPoint.x >= 0 &&
-			nextHeadPoint.y >= 0;
+			!this.snake.isOnPoint(nextHeadPoint) && !isObstacle;
 
 		return isSteppable;
 	},
