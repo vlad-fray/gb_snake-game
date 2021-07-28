@@ -84,7 +84,7 @@ const map = {
 	obstacleCells: [],
 	obstacleCellsCoords: [],
 
-	init(rowsCount, colsCount, obstaclesCount) {
+	init(rowsCount, colsCount) {
 		const table = document.getElementById('game');
 		table.innerHTML = '';
 
@@ -104,8 +104,6 @@ const map = {
 				this.cells[`x${col}_y${row}`] = td;
 			}
 		}
-
-		this.renderObstacles(obstaclesCount);
 	},
 
 	render(snakePointsArray, foodPoint) {
@@ -277,6 +275,9 @@ const game = {
 			}
 			return;
 		}
+
+		const goalEl = document.getElementById('game-goal');
+		goalEl.textContent = this.config.getWinFoodCount();
 
 		this.map.init(
 			this.config.getRowsCount(),
