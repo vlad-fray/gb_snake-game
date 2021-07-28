@@ -130,6 +130,7 @@ const map = {
 		}
 
 		this.obstacleCells = [];
+		this.obstacleCellsCoords = [];
 		for (let obs = 0; obs < obstaclesCount; obs++) {
 			const coords = game.getRandomFreeCoords();
 			const newObstacle = this.cells[`x${coords.x}_y${coords.y}`];
