@@ -90,9 +90,6 @@ const map = {
 
 		this.cells = {};
 		this.usedCells = [];
-		this.obstacleCells = [];
-
-		console.log(obstaclesCount);
 
 		for (let row = 0; row < rowsCount; row++) {
 			const tr = document.createElement('tr');
@@ -108,13 +105,7 @@ const map = {
 			}
 		}
 
-		for (let obs = 0; obs < obstaclesCount; obs++) {
-			const coords = game.getRandomFreeCoords();
-			const newObstacle = this.cells[`x${coords.x}_y${coords.y}`];
-			newObstacle.classList.add('obstacle');
-			this.obstacleCellsCoords.push(coords);
-			this.obstacleCells.push(newObstacle);
-		}
+		this.renderObstacles(obstaclesCount);
 	},
 
 	render(snakePointsArray, foodPoint) {
@@ -133,6 +124,21 @@ const map = {
 		const foodCell = this.cells[`x${foodPoint.x}_y${foodPoint.y}`];
 		foodCell.classList.add('food');
 		this.usedCells.push(foodCell);
+	},
+
+	renderObstacles(obstaclesCount) {
+		for (const cell of this.obstacleCells) {
+			cell.className = 'col';
+		}
+
+		this.obstacleCells = [];
+		for (let obs = 0; obs < obstaclesCount; obs++) {
+			const coords = game.getRandomFreeCoords();
+			const newObstacle = this.cells[`x${coords.x}_y${coords.y}`];
+			newObstacle.classList.add('obstacle');
+			this.obstacleCellsCoords.push(coords);
+			this.obstacleCells.push(newObstacle);
+		}
 	},
 
 	getObstacleCellsCoords() {
@@ -344,6 +350,7 @@ const game = {
 		this.stop();
 		this.snake.init(this.getStartSnakeBody(), 'up');
 		this.food.setCoords(this.getRandomFreeCoords());
+		this.map.renderObstacles(this.config.getObstaclesCount());
 		this.render();
 	},
 
