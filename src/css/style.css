@@ -74,3 +74,9 @@ body {
 #newGameButton:active {
 	background-color: lightcoral;
 }
+
+#playButton.disabled:hover,
+#playButton.disabled:active {
+	color: unset;
+	background-color: unset;
+}

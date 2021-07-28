@@ -1,5 +1,4 @@
 'use strict';
-// Нужно доделать столкновение с препятствиями
 
 const settings = {
 	rowsCount: 21,
@@ -402,8 +401,17 @@ const game = {
 	canMakeStep() {
 		const nextHeadPoint = this.snake.getNextStepHeadPoint();
 
+		const isObstacle = this.map
+			.getObstacleCellsCoords()
+			.some((coords) => {
+				return (
+					coords.x === nextHeadPoint.x && coords.y === nextHeadPoint.y
+				);
+			});
+
 		const isSteppable =
 			!this.snake.isOnPoint(nextHeadPoint) &&
+			!isObstacle &&
 			nextHeadPoint.x < this.config.getColsCount() &&
 			nextHeadPoint.y < this.config.getRowsCount() &&
 			nextHeadPoint.x >= 0 &&
