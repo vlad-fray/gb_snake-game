@@ -5,7 +5,7 @@
 }
 
 body {
-	background-color: rgb(19, 19, 77);
+	background-color: darkblue;
 }
 
 #game-wrap {
@@ -19,8 +19,12 @@ body {
 	border-spacing: 0;
 }
 
-.row {
+.game-score {
+	margin-top: 30px;
+	font-size: 1.3rem;
+	color: white;
 }
+
 .col {
 	content: '';
 	width: 20px;
@@ -41,6 +45,10 @@ body {
 	background-color: green;
 }
 
+.obstacle {
+	background-color: black;
+}
+
 #menu {
 	display: flex;
 	justify-content: center;
@@ -49,10 +57,10 @@ body {
 #playButton,
 #newGameButton {
 	cursor: pointer;
+	color: darkblue;
 	font-size: 1.5rem;
 	padding: 10px;
 	margin: 10px;
-	border: 2px solid red;
 	border-radius: 5px;
 }
 
