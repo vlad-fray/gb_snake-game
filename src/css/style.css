@@ -1,0 +1,68 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background-color: rgb(19, 19, 77);
+}
+
+#game-wrap {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 40px;
+}
+
+#game {
+	border-spacing: 0;
+}
+
+.row {
+}
+.col {
+	content: '';
+	width: 20px;
+	height: 20px;
+	border: 2px solid rgba(245, 245, 245, 0.6);
+	border-collapse: collapse;
+}
+
+.snakeHead {
+	background-color: red;
+}
+
+.snakeBody {
+	background-color: white;
+}
+
+.food {
+	background-color: green;
+}
+
+#menu {
+	display: flex;
+	justify-content: center;
+}
+
+#playButton,
+#newGameButton {
+	cursor: pointer;
+	font-size: 1.5rem;
+	padding: 10px;
+	margin: 10px;
+	border: 2px solid red;
+	border-radius: 5px;
+}
+
+#playButton:hover,
+#newGameButton:hover {
+	color: white;
+	background-color: red;
+}
+
+#playButton:active,
+#newGameButton:active {
+	background-color: lightcoral;
+}
